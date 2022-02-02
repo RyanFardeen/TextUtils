@@ -1,16 +1,15 @@
 import { useState } from "react";
 import React from "react";
-// import "./App.css";
-// import About from "./components/About";
+import "./App.css";
+import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Textarea from "./components/Textarea";
 import Alert from "./components/Alert";
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Link,
-//   Routes,
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -41,19 +40,19 @@ function App() {
 
   return (
     <div>
-      {/* <Router> */}
+      <Router>
         <Navbar mode={mode} toggleMode={toggleMode} />
         <Alert alert={alert} />
 
-        {/* <Routes> */}
-          {/* <Route exact path="/" element={<Textarea showAlert={showAlert} mode={mode} alert={alert} />}> */}
-          <Textarea showAlert={showAlert} mode={mode} alert={alert} />
-          {/* </Route>
-          <Route exact path="/about" element={<About/>}>
+        <Routes>
+          <Route exact path="/" element={<Textarea showAlert={showAlert} mode={mode} alert={alert} />}>
+          {/* <Textarea showAlert={showAlert} mode={mode} alert={alert} /> */}
+          </Route>
+          <Route exact path="/about" element={<About mode={mode}/>}>
             
           </Route>
         </Routes>
-      </Router> */}
+      </Router>
     </div>
   );
 }

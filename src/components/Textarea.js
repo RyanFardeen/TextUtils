@@ -29,10 +29,15 @@ export default function Textarea(props) {
     navigator.clipboard.writeText(text)
     props.showAlert("Text Copied","success")
   }
+  const toHandleSpaces= () => {
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+    props.showAlert("Extra Spaces Removed ","success")
+  }
 
   return (
     <div className={`container my-3 text-${props.mode==='light'?'dark':'light'}`}>
-      <h2>Enter your text here</h2>
+      <h2 className="mb-3">TextUtils - Word Counter, Character Counter, Remove Extra Spaces</h2>
       <div className="mb-3">
         <textarea
           className={`form-control bg-${props.mode==='light'?'light':'dark'} text-${props.mode==='light'?'dark':'light'}`}
@@ -42,24 +47,27 @@ export default function Textarea(props) {
           onChange={handleChange}
         ></textarea>
       </div>
-      <button className="btn btn-primary mx-1" type="submit" onClick={toUpper} >
+      <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" type="submit" onClick={toUpper} >
         Convert to UpperCase
       </button>
-      <button className="btn btn-primary mx-1" type="submit" onClick={toLower}>
+      <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" type="submit" onClick={toLower}>
         Convert to LowerCase
       </button>
-      <button className="btn btn-primary mx-1" type="submit" onClick={toClear}>
+      <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" type="submit" onClick={toClear}>
         Clear text
       </button>
-      <button className="btn btn-primary mx-1" type="submit" onClick={toCopy}>
+      <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" type="submit" onClick={toCopy}>
         Copy text
       </button>
+      <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" type="submit" onClick={toHandleSpaces}>
+        Remove Extra Spaces
+      </button>
       <h3>
-        {text.split(" ").length} words and {text.length} characters
+        {text.split(" ").filter((element)=>{return element.length !== 0}).length} words and {text.length} characters
       </h3>
-      <h3>{0.8 * text.split(" ").length} seconds to read</h3>
+      <h3>{0.008 * text.split(" ").filter((element)=>{return element.length !== 0}).length} seconds to read</h3>
       <h3>Preview :</h3>
-      <p>{text.length === 0?"Enter any text to Preview":text}</p>
+      <p>{text.length === 0?"Nothing to Preview":text}</p>
     </div>
   );
 }
