@@ -10,7 +10,7 @@ export default function Navbar(props) {
         
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            {props.navtitle}
+            TextUtils
           </Link>
           <button
             className="navbar-toggler"
